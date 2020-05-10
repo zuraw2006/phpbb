@@ -18,7 +18,7 @@ $ docker-compose up -d
 
 ## About this image
 
-This image is for **manual** forum phpBB installation with FastCGI implementation for PHP. So some kinde of reverse proxy (such as NGINX, Apache, or other tool which speaks the FastCGI) will be required. I choosed NGINX.
+This image is for **manual** forum phpBB installation with FastCGI implementation for PHP. So some kind of reverse proxy (such as NGINX, Apache, or other tool which speaks the FastCGI) will be required. I chose NGINX.
 
 After installation, you **must** delete the ```install``` directory. Look at the ```example/after_install.sh``` file.
 

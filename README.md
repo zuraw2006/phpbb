@@ -20,24 +20,22 @@ $ docker-compose up -d
 
 This image is for **manual** forum phpBB installation with FastCGI implementation for PHP. So some kind of reverse proxy (such as NGINX, Apache, or other tool which speaks the FastCGI) will be required. I chose NGINX.
 
-After installation, you **must** delete the ```install``` directory. Look at the ```example/after_install.sh``` file.
+After installation, you **must** delete the `install` directory. Look at the `example/after_install.sh` file.
 
 ### phpBB version
 
-```3.3.0```
+`3.3.15`
 
 ## Docker Compose
 
-Example ```docker-compose.yml```:
+Example `docker-compose.yml`:
 
 ```shell
-version: '3'
-
 services:
   phpbb:
-    depends_on: 
+    depends_on:
       - db
-    image: zuraw2006/phpbb:3.3.0-php7.4-fpm
+    image: zuraw2006/phpbb:3.3.15-php8.4.6-fpm
     restart: always
     volumes:
       - phpbb:/var/www/html
@@ -45,14 +43,14 @@ services:
       - app-network
 
   db:
-    image: mariadb:10.4
+    image: mariadb:11.7
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: example
       MYSQL_USER: phpbb_user
       MYSQL_PASSWORD: example
       MYSQL_DATABASE: phpbb
-    volumes: 
+    volumes:
       - dbdata:/var/lib/mysql
     networks:
       - app-network
@@ -60,7 +58,7 @@ services:
   webserver:
     depends_on:
       - phpbb
-    image: nginx:1.17.10
+    image: nginx:1.27
     restart: always
     ports:
       - "80:80"
@@ -76,10 +74,10 @@ volumes:
 
 networks:
   app-network:
-    driver: bridge  
+    driver: bridge
 ```
 
-Run ```docker-compose up -d```, wait for it to initialize completely and visit ```http://localhost```.
+Run `docker compose up -d`, wait for it to initialize completely and visit `http://localhost`.
 
 ## LICENSE
 

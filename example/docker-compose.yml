@@ -1,10 +1,8 @@
-version: '3'
-
 services:
   phpbb:
-    depends_on: 
+    depends_on:
       - db
-    image: zuraw2006/phpbb:3.3.0-php7.4-fpm
+    image: zuraw2006/phpbb:3.3.15-php8.4.6-fpm
     restart: always
     volumes:
       - phpbb:/var/www/html
@@ -12,14 +10,14 @@ services:
       - app-network
 
   db:
-    image: mariadb:10.4
+    image: mariadb:11.7
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: example
       MYSQL_USER: phpbb_user
       MYSQL_PASSWORD: example
       MYSQL_DATABASE: phpbb
-    volumes: 
+    volumes:
       - dbdata:/var/lib/mysql
     networks:
       - app-network
@@ -27,10 +25,10 @@ services:
   webserver:
     depends_on:
       - phpbb
-    image: nginx:1.17.10
+    image: nginx:1.27
     restart: always
     ports:
-      - "80:80"
+      - '80:80'
     volumes:
       - phpbb:/var/www/html
       - ./nginx-conf:/etc/nginx/conf.d
@@ -43,4 +41,4 @@ volumes:
 
 networks:
   app-network:
-    driver: bridge  
+    driver: bridge
